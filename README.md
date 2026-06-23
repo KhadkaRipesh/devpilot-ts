@@ -23,7 +23,7 @@ This is the foundation for a learning project. It covers:
 
 ```bash
 # 1. Clone the repo
-git clone <your-repo-url>
+git clone https://github.com/KhadkaRipesh/devpilot-ts.git
 cd devpilot-ts
 
 # 2. Install dependencies
