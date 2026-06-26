@@ -37,4 +37,17 @@ program
     console.log(result.output);
   });
 
+program
+  .command("testgen <file>")
+  .description("Generate and run tests for a code file")
+  .action(async (file: string) => {
+    const spinner = ora("Generating tests (may retry on failures)...").start();
+    const agent = registry.get("testgen")!;
+    const result = await agent.run({ filePath: file });
+    spinner.stop();
+
+    const icon = result.success ? chalk.green("✓") : chalk.red("✗");
+    console.log(`${icon} ${result.output}`);
+  });
+
 program.parse();

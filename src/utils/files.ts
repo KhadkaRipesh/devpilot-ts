@@ -1,5 +1,12 @@
-import { readFileSync, readdirSync, statSync } from "fs";
-import { resolve, extname, join } from "path";
+import {
+  readFileSync,
+  readdirSync,
+  statSync,
+  existsSync,
+  mkdirSync,
+  writeFileSync,
+} from "fs";
+import { resolve, extname, join, basename } from "path";
 
 export function readFile(filePath: string): string {
   const resolved = resolve(filePath);
@@ -30,4 +37,14 @@ export function listFiles(dir: string, extensions?: string[]): string[] {
 
   walk(resolve(dir));
   return results.sort();
+}
+
+export function saveFile(testCode: string, sourcePath: string): string {
+  const testsDir = join(resolve("."), "examples");
+  if (!existsSync(testsDir)) {
+    mkdirSync(testsDir, { recursive: true });
+  }
+  const testFile = join(testsDir, `test_${basename(sourcePath)}`);
+  writeFileSync(testFile, testCode, "utf-8");
+  return testFile;
 }

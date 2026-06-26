@@ -4,7 +4,7 @@ import { createOpenAI } from "@ai-sdk/openai";
 let cachedModel: LanguageModel | null = null;
 
 export function getModel(modelName = "gemma3:4b"): LanguageModel {
-  // if (cachedModel) return cachedModel;
+  if (cachedModel) return cachedModel;
 
   const ollama = createOpenAI({
     baseURL: "http://localhost:11434/v1",
